@@ -1,0 +1,22 @@
+﻿<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+	<form name="form" ng-submit="SaveData()" role="form">
+		<div class="form-group">
+			<label for="NOMBRE">Nombre:</label>
+			<i class="fa fa-key"></i>
+			<input type="text" name="NOMBRE" id="NOMBRE" class="form-control" data-ng-model="Departamento.NOMBRE"  data-ng-readonly="ReadOnly" required />
+			<span ng-show="form.NOMBRE.$dirty && form.NOMBRE.$error.required" class="help-block">Se requiere Nombre</span>
+		</div>
+		<div class="form-group">
+			<label for="IDEMPLEADO">Responsable:</label>
+			<i class="fa fa-lock"></i>
+			<input type="text" name="IDEMPLEADO" id="IDEMPLEADO" class="form-control" data-ng-style="{'color': ResponsableColor}" data-ng-model="ResponsableSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="ResponsableSearch" required />
+			<select class="form-control" name="RESPONSABLE" id="RESPONSABLE" data-ng-show="ResponsableToggle" data-ng-model="ResponsableSelected" data-ng-options="Responsable.C1 for Responsable in Responsables" ng-change="ResponsableSelect()"></select>
+			<span ng-show="(ResponsableColor=='red') && form.IDEMPLEADO.$error.required" class="help-block">Se requiere Responsable</span>
+		</div>
+		<div class="form-actions">
+			<button ng-disabled="(ResponsableColor=='red') || form.$invalid || dataLoading" class="btn btn-default" data-ng-click="SaveData">Aceptar</button>
+			<button class="btn btn-default" data-ng-click="Cancelar" back>Cancelar</button>
+			<img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+		</div>
+	</form>
+</div>

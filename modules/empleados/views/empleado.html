@@ -1,0 +1,91 @@
+﻿<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><button class="btn btn-default" data-ng-click="TabNavigation(1)" ng-disabled="TabPanel1">GENERALES</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab1" data-ng-click="TabNavigation(1)"></a>--></li>
+				<li></li>
+				<li><button class="btn btn-default" data-ng-click="TabNavigation(2)" ng-disabled="TabPanel2">EMPRESA</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab2" data-ng-click="TabNavigation(2)">Tab 2</a>--></li>
+				<li></li>
+				<li><button class="btn btn-default" data-ng-click="TabNavigation(3)" data-ng-show="TabPanel3Visible" ng-disabled="TabPanel3">USUARIO</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab3" data-ng-click="TabNavigation(3)">Tab 3</a>--></li>
+			</ul>
+		</div>
+	<form name="form" ng-submit="SaveData()" role="form">
+		<div ng-show="TabPanel1">
+			<div class="form-group">
+				<label for="NOMBRE">Nombre:</label>
+				<i class="fa fa-key"></i>
+				<input type="text" name="NOMBRE" id="NOMBRE" class="form-control" data-ng-model="Empleado.NOMBRE"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.NOMBRE.$dirty && form.NOMBRE.$error.required" class="help-block">Se requiere Nombre</span>
+			</div>
+			<div class="form-group">
+				<label for="APELLIDO">Apellido:</label>
+				<i class="fa fa-key"></i>
+				<input type="text" name="APELLIDO" id="APELLIDO" class="form-control" data-ng-model="Empleado.APELLIDO"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.APELLIDO.$dirty && form.APELLIDO.$error.required" class="help-block">Se requiere Apellido</span>
+			</div>
+			<div class="form-group">
+				<label for="TELEFONOS">Telefonos:</label>
+				<i class="fa fa-key"></i>
+				<input type="text" name="TELEFONOS" id="TELEFONOS" class="form-control" data-ng-model="Empleado.TELEFONOS"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.TELEFONOS.$dirty && form.TELEFONOS.$error.required" class="help-block">Se requiere Telefono</span>
+			</div>
+			<div class="form-group">
+				<label for="CORREO">Correo:</label>
+				<i class="fa fa-key"></i>
+				<input type="email" name="CORREO" id="CORREO" class="form-control" data-ng-model="Empleado.CORREO"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.CORREO.$dirty && form.CORREO.$error.required" class="help-block">Se requiere Correo</span>
+			</div>
+		</div>
+		
+		<div ng-show="TabPanel2">
+			<div class="form-group">
+				<label for="IDSUCURSAL">Sucursal:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDSUCURSAL" id="IDSUCURSAL" class="form-control" data-ng-style="{'color': SucursalColor}" data-ng-model="SucursalSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="SucursalSearch"  />
+				<select class="form-control" name="SUCURSAL" id="SUCURSAL" data-ng-show="SucursalToggle" data-ng-model="SucursalSelected" data-ng-options="Sucursal.C1 for Sucursal in Sucursals" ng-change="SucursalSelect()"></select>
+				<span ng-show="(SucursalColor=='red') && form.IDEMPLEADO.$error.required" class="help-block">Se requiere Sucursal</span>
+			</div>
+			<div class="form-group">
+				<label for="IDDEPARTAMENTO">Departamento:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDDEPARTAMENTO" id="IDDEPARTAMENTO" class="form-control" data-ng-style="{'color': DepartamentoColor}" data-ng-model="DepartamentoSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="DepartamentoSearch" />
+				<select class="form-control" name="DEPARTAMENTO" id="DEPARTAMENTO" data-ng-show="DepartamentoToggle" data-ng-model="DepartamentoSelected" data-ng-options="Departamento.C1 for Departamento in Departamentos" ng-change="DepartamentoSelect()"></select>
+				<span ng-show="(DepartamentoColor=='red') && form.IDDEPARTAMENTO.$error.required" class="help-block">Se requiere Departamento</span>
+			</div>
+			<div class="form-group">
+				<label for="IDEMPLEADO_S">Supervisor:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDEMPLEADO_S" id="IDEMPLEADO_S" class="form-control" data-ng-style="{'color': SupervisorColor}" data-ng-model="SupervisorSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="SupervisorSearch" />
+				<select class="form-control" name="SUPERVISOR" id="SUPERVISOR" data-ng-show="SupervisorToggle" data-ng-model="SupervisorSelected" data-ng-options="Supervisor.C1 for Supervisor in Supervisors" ng-change="SupervisorSelect()"></select>
+				<span ng-show="(SupervisorColor=='red') && form.IDEMPLEADO_S.$error.required" class="help-block">Se requiere Supervisor</span>
+			</div>
+		</div>	
+		<div ng-show="TabPanel3">
+			<div class="form-group">
+				<label for="NUSUARIO">Nombre de Usuario:</label>
+				<i class="fa fa-key"></i>
+				<input type="text" name="NUSUARIO" id="NUSUARIO" class="form-control" data-ng-model="Empleado.NUSUARIO"  data-ng-readonly="ReadOnly" />
+				<span ng-show="form.NUSUARIO.$dirty && form.NUSUARIO.$error.required" class="help-block">Se requiere Nombre de Usuario</span>
+			</div>
+			<div class="form-group">
+				<label for="CUSUARIO">Contraseña:</label>
+				<i class="fa fa-key"></i>
+				<input type="password" name="CUSUARIO" id="CUSUARIO" class="form-control" data-ng-model="Empleado.CUSUARIO"  data-ng-readonly="ReadOnly" />
+				<span ng-show="form.CUSUARIO.$dirty && form.CUSUARIO.$error.required" class="help-block">Se requiere Contraseña</span>
+			</div>
+			<div class="form-group">
+				<label for="CUSUARIO2">Confirmar Contraseña:</label>
+				<i class="fa fa-key"></i>
+				<input type="password" name="CUSUARIO2" id="CUSUARIO2" class="form-control" data-ng-model="Empleado.CUSUARIO2"  data-ng-readonly="ReadOnly" />
+				<span ng-show="form.CUSUARIO2.$dirty && form.CUSUARIO2.$error.required" class="help-block">Se requiere Telefono</span>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button ng-disabled="dataLoading" class="btn btn-default" data-ng-click="SaveData">Aceptar</button>
+			<button class="btn btn-default" data-ng-click="Cancelar" back>Cancelar</button>
+			<img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+		</div>
+	</form>
+</div>

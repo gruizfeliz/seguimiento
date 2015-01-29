@@ -1,0 +1,1 @@
+<?php $table_fields_cached = json_decode('{"0":null,"1":[],"2":"SELECT * FROM `users`","21":"SELECT COUNT(*) AS RCOUNT FROM `users`","3":"INSERT INTO `users` () VALUES ()","4":"UPDATE `users` SET","5":"DELETE FROM `users`","6":" WHERE ()","7":0}',true); ?>

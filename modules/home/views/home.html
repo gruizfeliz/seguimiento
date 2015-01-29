@@ -1,0 +1,42 @@
+﻿<div>
+	<div class="table table-striped">
+		<div class="row">
+			<div class="col-xs-5 col-md-8 text-left"><input class="form-control" type="text" id="SearchText" data-ng-model="SearchCMD.name"></div>
+			<div class="col-xs-4 col-md-2 text-right"><select class="form-control" data-ng-model="SearchOptionSelected" ng-options="SearchOption.label for SearchOption in SearchOptions"></select></div>
+			<div class="col-xs-3 col-md-2 text-right"><button class="btn btn-default" id="Buscar" data-ng-click="BuscarREQUEST()" class="titleb">Buscar</button></div>
+		</div>
+		<div class="row"></div>
+		<div class="container">
+			<div class="col-xs-4 text-left" ><button class="btn btn-default" id="Agregar" data-ng-show="AgregarShow" data-ng-click="Agregar()" class="titleb">{{AgregarLabel}}</button></div>
+			<div class="col-xs-4 text-center"><button class="btn btn-default" id="Editar" data-ng-show="EditarShow" data-ng-click="Editar()" class="titleb">{{EditarLabel}}</button></div>
+			<div class="col-xs-4 text-right" ><button class="btn btn-default" id="Eliminar" data-ng-show="EliminarShow" data-ng-click="Eliminar()" class="titleb">{{EliminarLabel}}</button></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-2" ><button id="prev" class="btn btn-default" data-ng-click="Prev()" class="titleb"><< </button></div>
+			<div class="col-xs-offset-3 col-xs-4"><span>{{MainSearchs.page}} / {{MainSearchs.totalpages}}  </span></div>
+			<div class="col-xs-offset-1 col-xs-2 text-right" ><button id="next" class="btn btn-default" data-ng-click="Next()" class="titleb"> >></button></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-2"><strong>ID</strong></div>
+			<div class="col-xs-5"><strong>{{Campo1Label}}</strong></div>
+			<div class="col-xs-5"><strong>{{Campo2Label}}</strong></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+			</div>
+		</div>
+		<div class="row" data-ng-repeat="MainSearch in MainSearchs.results">
+			<div  data-ng-style="{'color': MainSearch.Color, 'background-color': MainSearch.BackColor}" data-ng-click="RowSelect($index)" ng-mouseover="MouseOverRow($index)">
+				<div class="col-xs-2" data-ng-style="{'color': MainSearch.Color, 'background-color': MainSearch.BackColor}">{{MainSearch.ID}}</div>
+				<div class="col-xs-5" data-ng-style="{'color': MainSearch.Color, 'background-color': MainSearch.BackColor}">{{MainSearch.C1}}</div>
+				<div class="col-xs-5" data-ng-style="{'color': MainSearch.Color, 'background-color': MainSearch.BackColor}">{{MainSearch.C2}}</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-2"><button id="prev" class="btn btn-default" data-ng-click="Prev()" class="titleb"><< </button></div>
+			<div class="col-xs-offset-3 col-xs-4" ><span>{{MainSearchs.page}} / {{MainSearchs.totalpages}}  </span></div>
+			<div class="col-xs-offset-1 col-xs-2 text-right" ><button id="next" class="btn btn-default" data-ng-click="Next()" class="titleb"> >></button></div>
+		</div>
+	</div>
+</div>

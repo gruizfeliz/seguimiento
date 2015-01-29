@@ -1,0 +1,97 @@
+﻿<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><button class="btn btn-default" data-ng-click="TabNavigation(1)" ng-disabled="TabPanel1">GENERALES</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab1" data-ng-click="TabNavigation(1)"></a>--></li>
+				<li></li>
+				<li><button class="btn btn-default" data-ng-click="TabNavigation(2)" ng-disabled="TabPanel2">ENTREGA</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab2" data-ng-click="TabNavigation(2)">Tab 2</a>--></li>
+				<li></li>
+				<li><button class="btn btn-default" data-ng-show="TabPanel3Visible" data-ng-click="TabNavigation(3)" ng-disabled="TabPanel3">CIERRE</button>
+				<!--<a href="" data-toggle="tab" data-target="#tab3" data-ng-click="TabNavigation(3)">Tab 3</a>--></li>
+			</ul>
+		</div>
+	<form name="form" ng-submit="SaveData()" role="form">
+		<div ng-show="TabPanel1">
+			<div class="form-group">
+				<label for="FECHA">Fecha:</label>
+				<i class="fa fa-key"></i>
+				<input type="date" name="FECHA" id="FECHA" class="form-control" data-ng-model="FECHA" />
+			</div>
+			<div class="form-group">
+				<label for="IDCASO">Caso:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDCASO" id="IDCASO" class="form-control" data-ng-style="{'color': CasoColor}" data-ng-model="CasoSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="CasoSearch" required />
+				<select class="form-control" name="RESPONSABLE" id="RESPONSABLE" data-ng-show="CasoToggle" data-ng-model="CasoSelected" data-ng-options="Caso.C1 for Caso in Casos" ng-change="CasoSelect()"></select>
+				<span ng-show="(CasoColor=='red') && form.IDCASO.$error.required" class="help-block">Se requiere Caso</span>
+			</div>
+			<div class="form-group">
+				<label for="DESCRIPCION">Descripcion corta:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="DESCRIPCION" id="DESCRIPCION" class="form-control" data-ng-style="{'color': DescripcionColor}" data-ng-model="Tarea.DESCRIPCION" data-ng-readonly="ReadOnly" keyboard-poster post-function="DescripcionSearch" required />
+				<select class="form-control" name="RESPONSABLE" id="RESPONSABLE" data-ng-show="DescripcionToggle" data-ng-model="DescripcionSelected" data-ng-options="Descripcion.C1 for Descripcion in Descripcions" ng-change="DescripcionSelect()"></select>
+				<span ng-show="(DescripcionColor=='red') && form.DESCRIPCION.$error.required" class="help-block">Se requiere Descripcion</span>
+			</div>
+			<div class="form-group">
+				<label for="DETALLES">Detalles:</label>
+				<i class="fa fa-key"></i>
+				<textarea type="text" name="DETALLES" id="DETALLES" class="form-control" data-ng-model="Tarea.DETALLES"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.DETALLES.$dirty && form.DETALLES.$error.required" class="help-block">Se requiere Detalles</span>
+			</div>
+			<div class="form-group">
+				<label for="CREADO">Creado por:</label>
+				<i class="fa fa-key"></i>
+				<input type="text" name="CREADO" id="CREADO" class="form-control" data-ng-model="CREADO"  data-ng-readonly="ReadOnly" readonly />
+			</div>
+		</div>
+		
+		<div ng-show="TabPanel2">
+			<div class="form-group">
+				<label for="IDEMPLEADO">Responsable:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDEMPLEADO" id="IDEMPLEADO" class="form-control" data-ng-style="{'color': ResponsableColor}" data-ng-model="ResponsableSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="ResponsableSearch" required />
+				<select class="form-control" name="DEPARTAMENTO" id="DEPARTAMENTO" data-ng-show="ResponsableToggle" data-ng-model="ResponsableSelected" data-ng-options="Responsable.C1 for Responsable in Responsables" ng-change="ResponsableSelect()"></select>
+				<span ng-show="(ResponsableColor=='red') && form.IDEMPLEADO.$error.required" class="help-block">Se requiere Responsable</span>
+			</div>
+			<div class="form-group">
+				<label for="IDEMPLEADO">Supervisor:</label>
+				<i class="fa fa-lock"></i>
+				<input type="text" name="IDEMPLEADO" id="IDEMPLEADO" class="form-control" data-ng-style="{'color': SupervisorColor}" data-ng-model="SupervisorSelected.C1" data-ng-readonly="ReadOnly" keyboard-poster post-function="SupervisorSearch" />
+				<select class="form-control" name="RESPONSABLE" id="RESPONSABLE" data-ng-show="SupervisorToggle" data-ng-model="SupervisorSelected" data-ng-options="Supervisor.C1 for Supervisor in Supervisors" ng-change="SupervisorSelect()"></select>
+				<span ng-show="(SupervisorColor=='red') && form.IDEMPLEADO.$error.required" class="help-block">Se requiere Supervisor</span>
+			</div>
+			<div class="form-group">
+				<label for="FECHAENTREGA">Fecha de Entrega:</label>
+				<i class="fa fa-key"></i>
+				<input type="date" name="FECHAENTREGA" id="FECHAENTREGA" class="form-control" data-ng-model="FECHAENTREGA"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.FECHAENTREGA.$dirty && form.FECHAENTREGA.$error.required" class="help-block">Se requiere Fecha de Entrega</span>
+			</div>
+			<div class="form-group">
+				<label for="RECORDATORIO">Recordar (N. Dias):</label>
+				<i class="fa fa-key"></i>
+				<input type="number" name="RECORDATORIO" id="DETALLES" class="form-control" data-ng-model="Tarea.RECORDATORIO"  data-ng-readonly="ReadOnly" required />
+				<span ng-show="form.RECORDATORIO.$dirty && form.RECORDATORIO.$error.required" class="help-block">Se requiere Recordatorio</span>
+			</div>
+		</div>
+		
+		<div ng-show="TabPanel3">
+			<div class="form-group">
+				<label for="FECHACIERRE">Fecha Cierre:</label>
+				<i class="fa fa-key"></i>
+				<input type="date" name="FECHACIERRE" id="FECHACIERRE" class="form-control" data-ng-model="FECHACIERRE"  data-ng-readonly="ReadOnly" />
+				<span ng-show="form.FECHACIERRE.$dirty && form.FECHACIERRE.$error.required" class="help-block">Se requiere Fecha Cierre</span>
+			</div>
+			<div class="form-group">
+				<label for="CONCLUSIONES">Conclusiones:</label>
+				<i class="fa fa-key"></i>
+				<textarea type="text" name="CONCLUSIONES" id="CONCLUSIONES" class="form-control" data-ng-model="Tarea.CONCLUSIONES"  data-ng-readonly="ReadOnly" />
+				<span ng-show="form.CONCLUSIONES.$dirty && form.CONCLUSIONES.$error.required" class="help-block">Se requiere Conclusiones</span>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button ng-disabled="(ResponsableColor=='red') || form.$invalid || dataLoading" class="btn btn-default" data-ng-click="SaveData">Aceptar</button>
+			<button class="btn btn-default" data-ng-click="Cancelar" back>Cancelar</button>
+			<img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+		</div>
+	</form>
+</div>
